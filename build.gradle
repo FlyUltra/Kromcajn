@@ -41,6 +41,12 @@ dependencies {
 	
 }
 
+afterEvaluate {
+	loom.runs.configureEach {
+		vmArg "-XX:+AllowEnhancedClassRedefinition" // pro JBR (JetBrains Runtime)
+	}
+}
+
 processResources {
 	inputs.property "version", project.version
 
