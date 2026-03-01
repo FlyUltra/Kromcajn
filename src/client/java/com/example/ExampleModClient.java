@@ -1,11 +1,15 @@
 package com.example;
 
+import com.example.config.ConfigManager;
+import com.example.gui.ClickGuiScreen;
+import com.example.gui.MenuParticleManager;
+import com.example.modules.ESP;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderEvents;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FontDescription;
 import net.minecraft.network.chat.Style;
@@ -18,6 +22,18 @@ public class ExampleModClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 
+		ConfigManager configManager = new ConfigManager();
+		configManager.load();
+
+		HudRenderCallback.EVENT.register((g, tickDelta) -> {
+			Minecraft mc = Minecraft.getInstance();
+
+			if (mc.screen != null) {
+				MenuParticleManager.render(g, mc.getWindow().getGuiScaledWidth(), mc.getWindow().getGuiScaledHeight());
+			} else {
+				MenuParticleManager.reset();
+			}
+		});
 
 		HudRenderCallback.EVENT.register((drawContext, tickCounter) -> {
 			Minecraft client = Minecraft.getInstance();
@@ -36,7 +52,7 @@ public class ExampleModClient implements ClientModInitializer {
 							.withColor(rainbowWithAlpha)
 					);
 
-			Component version = Component.literal(" v0.1.2")
+			Component version = Component.literal(" v0.1.5")
 					.withStyle(Style.EMPTY
 							.withFont(new FontDescription.Resource(
 									Identifier.parse("modid:mojepismo")

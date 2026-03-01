@@ -1,6 +1,6 @@
 package com.example.modules;
 
-import com.example.Category;
+import com.example.gui.Category;
 import com.example.Module;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

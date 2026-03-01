@@ -1,7 +1,9 @@
 package com.example;
 
+import com.example.gui.Category;
 import com.example.settings.Setting;
 import net.minecraft.client.Minecraft;
+import org.lwjgl.glfw.GLFW; // Potřebujeme pro definici kláves
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +12,8 @@ public abstract class Module {
     private String name;
     private Category category;
     private boolean enabled;
+    private int key; // --- NOVÉ: Proměnná pro keybind ---
+
     public List<Setting<?>> settings = new ArrayList<>();
     protected Minecraft mc = Minecraft.getInstance();
     public String description = "Žádný popis nebyl nastaven.";
@@ -18,6 +22,15 @@ public abstract class Module {
         this.name = name;
         this.category = category;
         this.enabled = false;
+        this.key = GLFW.GLFW_FALSE;
+    }
+
+    public int getKey() {
+        return key;
+    }
+
+    public void setKey(int key) {
+        this.key = key;
     }
 
     public void toggle() {

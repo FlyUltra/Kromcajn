@@ -1,6 +1,6 @@
 package com.example.modules;
 
-import com.example.Category;
+import com.example.gui.Category;
 import com.example.Module;
 import com.example.settings.NumberSetting;
 

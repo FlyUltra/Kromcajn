@@ -1,8 +1,7 @@
 package com.example;
 
-import com.example.modules.FullBright;
-import com.example.modules.Scaffold;
-import com.example.modules.SideStep;
+import com.example.gui.Category;
+import com.example.modules.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +15,8 @@ public class ModuleManager {
         modules.add(new FullBright());
         modules.add(new SideStep());
         modules.add(new Scaffold());
+        modules.add(new ESP());
+        modules.add(new KillAura());
     }
 
     public List<Module> getModules() { return modules; }
@@ -23,6 +24,8 @@ public class ModuleManager {
     public List<Module> getModulesInCategory(Category c) {
         return modules.stream().filter(m -> m.getCategory() == c).collect(Collectors.toList());
     }
+
+
 
     public Module getModuleByName(String name) {
         return modules.stream().filter(m -> m.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
