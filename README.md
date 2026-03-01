@@ -1,4 +1,4 @@
-# Fabric Example Mod
+![Kromcajn Logo](./public/logo.png)
 
 ## Setup
 
